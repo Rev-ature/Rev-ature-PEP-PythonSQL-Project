@@ -105,6 +105,8 @@ def load_and_clean_call_logs(file_path):
                             (callId, phoneNumber, startTime, endTime, direction, userId) 
                         )
                         callId += 1
+                    except (ValueError, sqlite3.Error):
+                        continue
         conn.commit()
         print(f"Loaded users from {file_path}")
     except FileNotFoundError:
