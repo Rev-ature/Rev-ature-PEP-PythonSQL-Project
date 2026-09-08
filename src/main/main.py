@@ -67,7 +67,7 @@ def load_and_clean_users(file_path):
                     if firstName and lastName:
                         cursor.execute(
                             'INSERT INTO users(userId, firstName, lastName) VALUES (?, ?, ?)',
-                            (int(userId), firstName, lastName)
+                            (userId, firstName, lastName)
                         )
                         userId += 1
         conn.commit()
