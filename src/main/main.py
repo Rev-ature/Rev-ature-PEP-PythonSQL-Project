@@ -127,8 +127,8 @@ def write_user_analytics(csv_file_path):
                 COUNT(*) as calls
             FROM callLogs
             WHERE userID IS NOT NULL
-            GROUP BY userID
-            ORDER BY userID
+            GROUP BY userId
+            ORDER BY userId
         ''')
         results = cursor.fetchall()
 
@@ -150,7 +150,25 @@ def write_user_analytics(csv_file_path):
 # Then, write the ordered callLogs to orderedCalls.csv
 def write_ordered_calls(csv_file_path):
 
-    print("TODO: write_ordered_calls")
+    try:
+        cursor.execute('''
+            SELECT
+                callId, phoneNumber, startTime, endTime, direction, userId
+            FROM callLogs
+            ORDER BY callId ASC, startTime ASC
+        ''')
+        results = cursor.fetchall()
+
+        with open(csv_file_path, 'w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow(['callId', 'phoneNumber', 'startTime', 'endTime', 'direction', 'userId'])
+
+            for row in results:
+                writer.writerow(row)
+            
+        print(f"Wrote to {csv_file_path}")
+    except Exception as e:
+        print(f"Error {e}")
 
 
 
