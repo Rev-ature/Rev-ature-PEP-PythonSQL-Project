@@ -70,7 +70,7 @@ def load_and_clean_users(file_path):
                             (userId, firstName, lastName)
                         )
                         userId += 1
-        comm.commit()
+        conn.commit()
         print(f"Loaded users from {file_path}")
     except FileNotFoundError:
         print(f"Not found {file_path}")
