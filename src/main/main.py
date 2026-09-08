@@ -35,7 +35,6 @@ def main():
     )''')
 
     # You will implement these methods below. They just print TO-DO messages for now.
-    print(os.path.join(_RESOURCES_DIR, 'users.csv'))
     load_and_clean_users(os.path.join(_RESOURCES_DIR, 'users.csv'))
     load_and_clean_call_logs(os.path.join(_RESOURCES_DIR, 'callLogs.csv'))
     write_user_analytics(os.path.join(_RESOURCES_DIR, 'userAnalytics.csv'))
@@ -133,7 +132,7 @@ def write_user_analytics(csv_file_path):
         ''')
         results = cursor.fetchall()
 
-        with open(file_path, 'w', newline='', encoding='utf-8') as file:
+        with open(csv_file_path, 'w', newline='', encoding='utf-8') as file:
             writer = csv.reader(file)
             writer.writerow(['userId', 'avg', 'calls'])
 
