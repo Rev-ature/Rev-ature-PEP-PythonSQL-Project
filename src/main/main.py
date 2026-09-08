@@ -119,8 +119,32 @@ def load_and_clean_call_logs(file_path):
 # example: 1,105.0,4 - where 1 is the userId, 105.0 is the avgDuration, and 4 is the numCalls.
 def write_user_analytics(csv_file_path):
 
-    print("TODO: write_user_analytics")
+    try:
+        cursor.execute('''
+            SELECT
+                userId,
+                COUNT(*) as calls,
+                AVG(endTime - startTime) as avg
+            FROM callLogs
+            WHERE userID IS NOT NULL
+            GROUP BY userID
+            ORDER BY userID
+        ''')
+        results = cursor.fetchall()
 
+        with open(file_path, 'w', newline='', encoding='utf-8') as file:
+            writer = csv.reader(file)
+            writer.writerow(['userId', 'avg', 'calls'])
+
+            for row in results:
+                userId, avg, calls = row
+                if avg is not None:
+                    avg = round(avg,1)
+                writer.writerow([userId, avg, calls])
+            
+        print(f"Wrote to {csv_file_path}")
+    except Exception as e:
+        print(f"Error {e}")
 
 # This function will write the callLogs ordered by userId, then start time.
 # Then, write the ordered callLogs to orderedCalls.csv
