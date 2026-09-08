@@ -134,13 +134,13 @@ def write_user_analytics(csv_file_path):
 
         with open(csv_file_path, 'w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
-            writer.writerow(['userId', 'avg', 'calls'])
+            writer.writerow(['userId', 'calls', 'avg'])
 
             for row in results:
-                userId, avg, calls = row
+                userId, calls, avg = row
                 if avg is not None:
                     avg = round(avg,1)
-                writer.writerow([userId, avg, calls])
+                writer.writerow([userId, calls, avg])
             
         print(f"Wrote to {csv_file_path}")
     except Exception as e:
