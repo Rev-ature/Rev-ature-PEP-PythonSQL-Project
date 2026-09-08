@@ -123,8 +123,8 @@ def write_user_analytics(csv_file_path):
         cursor.execute('''
             SELECT
                 userId,
-                COUNT(*) as calls,
-                AVG(endTime - startTime) as avg
+                AVG(endTime - startTime) as avg,
+                COUNT(*) as calls
             FROM callLogs
             WHERE userID IS NOT NULL
             GROUP BY userID
@@ -134,13 +134,13 @@ def write_user_analytics(csv_file_path):
 
         with open(csv_file_path, 'w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
-            writer.writerow(['userId', 'calls', 'avg'])
+            writer.writerow(['userId', 'avg', 'calls'])
 
             for row in results:
-                userId, calls, avg = row
+                userId, avg, calls = row
                 if avg is not None:
                     avg = round(avg,1)
-                writer.writerow([userId, calls, avg])
+                writer.writerow([userId, avg, calls])
             
         print(f"Wrote to {csv_file_path}")
     except Exception as e:
