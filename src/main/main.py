@@ -60,7 +60,7 @@ def load_and_clean_users(file_path):
 
             userId = 1
             for row in reader:
-                if len(row) >= 2 and all(cell.strip() for cell in row[:2]):
+                if len(row) == 2 and all(cell.strip() for cell in row[:2]):
                     firstName = row[0].strip() if row[0] else ''
                     lastName = row[1].strip() if len(row) > 1 and row[1] else ''
 
