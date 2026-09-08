@@ -58,6 +58,7 @@ def load_and_clean_users(file_path):
             reader = csv.reader(file)
             header = next(reader, None)
 
+            userId = 1
             for row in reader:
                 if len >= 2:
                     firstName = row[0].strip() if row[0] else ''
