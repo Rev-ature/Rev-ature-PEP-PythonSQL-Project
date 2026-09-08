@@ -35,6 +35,7 @@ def main():
     )''')
 
     # You will implement these methods below. They just print TO-DO messages for now.
+    print(os.path.join(_RESOURCES_DIR, 'users.csv'))
     load_and_clean_users(os.path.join(_RESOURCES_DIR, 'users.csv'))
     load_and_clean_call_logs(os.path.join(_RESOURCES_DIR, 'callLogs.csv'))
     write_user_analytics(os.path.join(_RESOURCES_DIR, 'userAnalytics.csv'))
