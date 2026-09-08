@@ -140,7 +140,7 @@ def write_user_analytics(csv_file_path):
                 userId, avg, calls = row
                 if avg is not None:
                     avg = round(avg,1)
-                writer.writerow([userId, avg, calls])
+                writer.writerow([int(userId), avg, calls])
             
         print(f"Wrote to {csv_file_path}")
     except Exception as e:
