@@ -155,7 +155,7 @@ def write_ordered_calls(csv_file_path):
             SELECT
                 callId, phoneNumber, startTime, endTime, direction, userId
             FROM callLogs
-            ORDER BY callId ASC, startTime ASC
+            ORDER BY userId ASC, startTime ASC
         ''')
         results = cursor.fetchall()
 
